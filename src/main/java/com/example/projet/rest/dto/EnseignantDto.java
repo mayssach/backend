@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.Column;
 import java.util.Date;
 
 @Getter
@@ -15,9 +16,11 @@ import java.util.Date;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 
     public class EnseignantDto {
-    private Long id_ens ;
+    private Long idens ;
+    private Long cin ;
     private String nom ;
     private String prenom ;
-    private Date dateNais ;
+    private String dateNais ;
     private long numTel ;
+    private String email ;
 }

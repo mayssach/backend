@@ -39,11 +39,11 @@ public class Enseignant implements Serializable {
         @Id
         @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ens_generator")
         @SequenceGenerator(name = "ens_generator", sequenceName = "ens_SEQ", initialValue = 1, allocationSize = 1)
-        @Column(name = "id_ens", updatable = false, nullable = false)
-        private Long id_ens ;
+        @Column(name = "idens", updatable = false, nullable = false)
+        private Long idens ;
 
         @Column(name="cin")
-        private int cin ;
+        private Long cin ;
 
         @Column(name="nom")
         private String nom ;
@@ -52,9 +52,12 @@ public class Enseignant implements Serializable {
         private String prenom ;
 
         @Column(name="dateNais")
-        private Date dateNais ;
+        private String dateNais ;
 
         @Column(name="numTel")
         private long numTel ;
+
+        @Column(name="email")
+        private String email ;
 
 }

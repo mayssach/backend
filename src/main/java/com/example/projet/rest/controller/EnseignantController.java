@@ -30,15 +30,15 @@ public class EnseignantController {
         List <EnseignantDto> ensdto= modelMapper.map(ens,listType);
         return ResponseEntity.status(HttpStatus.OK).body(ensdto);
     }
-    @GetMapping("/Enseignant")
-    public Object Enseignant(@PathVariable Long id ) {
-        Enseignant e = enseignantService.getEnseignant(id) ;
+    @GetMapping("/Enseignants/{idens}")
+    public Object Enseignant(@PathVariable Long idens ) {
+        Enseignant e = enseignantService.getEnseignant(idens) ;
         EnseignantDto ensdto= modelMapper.map(e, EnseignantDto.class);
         return ResponseEntity.status(HttpStatus.OK).body(ensdto);
     }
 
-    @PostMapping("/Enseignant")
-    public Object AddEnseignant(@PathVariable Long idens,@Validated @RequestBody EnseignantDto ensDto)
+    @PostMapping("/Enseignants")
+    public Object AddEnseignant(@Validated @RequestBody EnseignantDto ensDto)
     {
         Enseignant ens = modelMapper.map(ensDto, Enseignant.class);
         ens = enseignantService.AddEnseignant(ens);
@@ -46,18 +46,18 @@ public class EnseignantController {
         return ResponseEntity.status(HttpStatus.CREATED).body(ensDto);
     }
 
-    @PutMapping("/Enseignant/{id}")
-    public Object UpdateEnseignant (@Validated @RequestBody EnseignantDto ensDto , @PathVariable Long id) {
+    @PutMapping("/Enseignants/{idens}")
+    public Object UpdateEnseignant (@Validated @RequestBody EnseignantDto ensDto , @PathVariable Long idens) {
         Enseignant ens = modelMapper.map(ensDto,Enseignant.class);
-        ens= enseignantService.UpdateEnseignant(id, ens);
+        ens= enseignantService.UpdateEnseignant(idens, ens);
         ensDto = modelMapper.map(ens,EnseignantDto.class);
         return ResponseEntity.status(HttpStatus.CREATED).body(ensDto);
 
     }
 
-    @DeleteMapping("/Enseignant/{id}")
-    public Object DeleteEnseignant(@PathVariable Long id) {
-        enseignantService.DeleteEnseignant(id);
+    @DeleteMapping("/Enseignants/{idens}")
+    public Object DeleteEnseignant(@PathVariable Long idens) {
+        enseignantService.DeleteEnseignant(idens);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
     }
 

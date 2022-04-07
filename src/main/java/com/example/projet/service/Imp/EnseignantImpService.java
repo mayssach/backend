@@ -30,7 +30,7 @@ public class EnseignantImpService implements EnseignantService {
     @Override
     public Enseignant UpdateEnseignant(Long id, Enseignant e) {
         getEnseignant(id);
-        e.setId_ens(id);
+        e.setIdens(id);
         return ensRepos.save(e);
     }
 
