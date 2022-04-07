@@ -29,8 +29,8 @@ public class Section implements Serializable {
      * Niveau id
      */
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ens_generator")
-    @SequenceGenerator(name = "ens_generator", sequenceName = "ens_SEQ", initialValue = 1, allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sec_generator")
+    @SequenceGenerator(name = "sec_generator", sequenceName = "sec_SEQ", initialValue = 1, allocationSize = 1)
     @Column(name = "idSection", updatable = false, nullable = false)
     private Long idSection ;
 

@@ -29,8 +29,8 @@ public class Specialite implements Serializable {
      * Niveau id
      */
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ens_generator")
-    @SequenceGenerator(name = "ens_generator", sequenceName = "ens_SEQ", initialValue = 1, allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "spe_generator")
+    @SequenceGenerator(name = "spe_generator", sequenceName = "spe_SEQ", initialValue = 1, allocationSize = 1)
     @Column(name = "idSpec", updatable = false, nullable = false)
     private Long idSpec ;
 

@@ -1,6 +1,7 @@
 package com.example.projet.model.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.*;
 
@@ -29,13 +30,19 @@ public class SectionMatiere implements Serializable {
      * Niveau id
      */
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ens_generator")
-    @SequenceGenerator(name = "ens_generator", sequenceName = "ens_SEQ", initialValue = 1, allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "secm_generator")
+    @SequenceGenerator(name = "secm_generator", sequenceName = "secm_SEQ", initialValue = 1, allocationSize = 1)
     @Column(name = "idSectionMatiere", updatable = false, nullable = false)
     private Long idSectionMatiere ;
 
     @Column(name="libelle")
     private String libelle ;
+
+    @Column(name="dateCrea")
+    private Date dateCrea ;
+
+    @Column(name="dateModif")
+    private Date dateModif ;
 
 
     @ManyToOne(fetch = FetchType.LAZY)

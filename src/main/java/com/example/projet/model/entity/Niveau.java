@@ -32,8 +32,8 @@ public class Niveau implements Serializable {
      * Niveau id
      */
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ens_generator")
-    @SequenceGenerator(name = "ens_generator", sequenceName = "ens_SEQ", initialValue = 1, allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "niv_generator")
+    @SequenceGenerator(name = "niv_generator", sequenceName = "niv_SEQ", initialValue = 1, allocationSize = 1)
     @Column(name = "idNiveau", updatable = false, nullable = false)
     private Long idNiveau ;
 
