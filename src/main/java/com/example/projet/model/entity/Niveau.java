@@ -40,6 +40,9 @@ public class Niveau implements Serializable {
     @Column(name="libelle")
     private String libelle ;
 
+    @Column(name="primSec")
+    private int primSec ;
+
     @OneToMany(mappedBy="niveau")
     private List<Section> sections;
 
