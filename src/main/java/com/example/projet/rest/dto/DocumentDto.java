@@ -6,12 +6,22 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+
+import javax.persistence.Lob;
+import java.util.Date;
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class MatiereDto {
-    private Long idmatiere ;
-    private String nomMatiere ;
+public class DocumentDto {
+    private Long idDocument ;
+    private String nom ;
+    private String description ;
+    private String type ;
+    private Date dateCreation ;
+    private Date dateModif ;
+    @Lob
+    private byte[] fichier;
+
 }

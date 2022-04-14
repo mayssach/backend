@@ -51,7 +51,7 @@ public class Section implements Serializable {
     @JoinColumn(name = "SPECIALITE", nullable = false)
     private Specialite specialite;
 
-
     @OneToMany(mappedBy="section")
-    private List<SectionMatiere> sectionMatieres;
+    private List<Document> documents;
+
 }
