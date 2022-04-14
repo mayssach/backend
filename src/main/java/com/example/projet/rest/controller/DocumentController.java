@@ -3,6 +3,8 @@ package com.example.projet.rest.controller;
 import com.example.projet.model.entity.Document;
 import com.example.projet.rest.dto.DocumentDto;
 import com.example.projet.service.DocumentService;
+import com.example.projet.service.NiveauService;
+import com.example.projet.service.SectionService;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,10 @@ import java.util.stream.Stream;
 public class DocumentController {
     @Autowired
     private DocumentService documentService ;
+    @Autowired
+    private NiveauService niveauService ;
+    @Autowired
+    private SectionService sectionService ;
     @Autowired
     private ModelMapper modelMapper ;
     @GetMapping("/Documents")
@@ -53,11 +59,23 @@ public class DocumentController {
         return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
-    @PostMapping("/Documents")
-    public Object AddDocument(@Validated @RequestBody DocumentDto dto,@RequestParam("file") MultipartFile file) throws IOException {
+    @PostMapping("/Niveaux/{idNiveau}/Documents")
+    public Object AddDocument(@PathVariable Long idNiveau,@Validated @RequestBody DocumentDto dto,@RequestParam("fichier") MultipartFile file) throws IOException {
         Document doc = modelMapper.map(dto, Document.class);
         Date dateCreation = new Date();
         doc.setDateCreation(dateCreation);
+        doc.setNiveau(niveauService.getNiveau(idNiveau));
+        doc = documentService.AddDocument(file);
+        dto = modelMapper.map(doc, DocumentDto.class);
+        return ResponseEntity.status(HttpStatus.CREATED).body(dto);
+    }
+
+    @PostMapping("/Sections/{idSec}/Documents")
+    public Object AddDocumentSec(@PathVariable Long idSec,@Validated @RequestBody DocumentDto dto,@RequestParam("file") MultipartFile file) throws IOException {
+        Document doc = modelMapper.map(dto, Document.class);
+        Date dateCreation = new Date();
+        doc.setDateCreation(dateCreation);
+        doc.setSection(sectionService.getSection(idSec));
         doc = documentService.AddDocument(file);
         dto = modelMapper.map(doc, DocumentDto.class);
         return ResponseEntity.status(HttpStatus.CREATED).body(dto);

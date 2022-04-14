@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
 
 
 import javax.persistence.Lob;
@@ -21,7 +22,6 @@ public class DocumentDto {
     private String type ;
     private Date dateCreation ;
     private Date dateModif ;
-    @Lob
-    private byte[] fichier;
+    private MultipartFile fichier;
 
 }

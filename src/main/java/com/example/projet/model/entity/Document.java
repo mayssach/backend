@@ -48,8 +48,7 @@ public class Document implements Serializable {
     @Column(name="dateModif")
     private Date dateModif ;
 
-    @Lob
-    private byte[] fichier;
+    private byte[]  fichier;
 
     public Document(String nom, String type, byte[] fichier) {
         this.nom = nom;
