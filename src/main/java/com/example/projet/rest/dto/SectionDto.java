@@ -14,8 +14,4 @@ import lombok.Setter;
 public class SectionDto {
     private Long idSection ;
     private String libelle ;
-    private String libelleNiv ;
-    private String libelleSpec ;
- //   private SpecialiteDto specialite;
-   // private List<SectionMatiere> sectionMatieres;
 }

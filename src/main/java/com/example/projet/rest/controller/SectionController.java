@@ -1,6 +1,5 @@
 package com.example.projet.rest.controller;
 
-
 import com.example.projet.model.entity.Niveau;
 import com.example.projet.model.entity.Section;
 import com.example.projet.model.entity.Specialite;
@@ -57,8 +56,8 @@ public class SectionController {
         Specialite specialite = specialiteService.getSpecialite(idSpec);
         section.setNiveau(niveau);
         section.setSpecialite(specialite);
-        section.setLibelleNiv(niveau.getLibelle());
-        section.setLibelleSpec(specialite.getLibelle());
+        String a=niveau.getLibelle()+" année "+specialite.getLibelle();
+        section.setLibelle(a);
         section = sectionService.AddSection(section);
         sectionDto = modelMapper.map(section, SectionDto.class);
         return ResponseEntity.status(HttpStatus.CREATED).body(sectionDto);

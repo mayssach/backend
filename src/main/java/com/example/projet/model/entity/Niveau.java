@@ -1,12 +1,10 @@
 package com.example.projet.model.entity;
 
-import org.springframework.boot.autoconfigure.domain.EntityScan;
+
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 import javax.persistence.*;
-import javax.print.Doc;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -47,7 +45,7 @@ public class Niveau implements Serializable {
     @OneToMany(mappedBy="niveau")
     private List<Section> sections;
 
-    @OneToMany(mappedBy="niveau")
+   @OneToMany(mappedBy="niveau")
     private List<Document> documents;
 
 

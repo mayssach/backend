@@ -36,6 +36,7 @@ public class TypeDoc implements Serializable {
     @Column(name="libelle")
     private String libelle ;
 
+
     @OneToMany(mappedBy="typeDoc")
     private List<Document> documents;
 

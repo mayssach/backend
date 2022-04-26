@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.GenericGenerator;
 
 
 @Entity
@@ -18,53 +19,41 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class Document implements Serializable {
-
-    /**
-     * generated serial ID
-     */
-    private static final long serialVersionUID = 1L;
-
-    /**
-     * Document id
-     */
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "doc_generator")
-    @SequenceGenerator(name = "doc_generator", sequenceName = "doc_SEQ", initialValue = 1, allocationSize = 1)
-    @Column(name = "idDocument", updatable = false, nullable = false)
-    private Long idDocument ;
-
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
+    @Column(name="id")
+    private String id;
     @Column(name="nom")
-    private String nom ;
-
-    @Column(name="description")
-    private String description ;
-
+    private String nom;
     @Column(name="type")
-    private String type ;
-
+    private String type;
     @Column(name="dateCreation")
-    private Date dateCreation ;
+    private Date dateCreation;
+    @Column(name="taille")
+    private double taille;
 
-    @Column(name="dateModif")
-    private Date dateModif ;
+    @Lob
+    private byte[] data;
 
-    private byte[]  fichier;
-
-    public Document(String nom, String type, byte[] fichier) {
-        this.nom = nom;
-        this.type = type;
-        this.fichier = fichier;
-    }
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "TYPEDOC", nullable = false)
+    @JoinColumn(name = "id_typedoc")
     private TypeDoc typeDoc;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "SECTION", nullable = false)
-    private Section section;
+    @JoinColumn(name = "id_niveau")
+    private Niveau niveau;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "NIVEAU", nullable = false)
-    private Niveau niveau;
+    @JoinColumn(name = "id_section")
+    private Section section;
+
+    public Document(String nom, String type, byte[] data, Date dateCreation,double taille) {
+        this.nom = nom;
+        this.type = type;
+        this.data = data;
+        this.dateCreation=dateCreation;
+        this.taille=taille;
+    }
 
 }

@@ -17,6 +17,6 @@ public class NiveauDto {
 
     private Long idNiveau ;
     private String libelle ;
-    private List<Section> sections;
+    //private List<Section> sections;
     private int primSec ;
 }

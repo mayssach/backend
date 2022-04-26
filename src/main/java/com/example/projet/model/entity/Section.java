@@ -37,12 +37,6 @@ public class Section implements Serializable {
     @Column(name="libelle")
     private String libelle ;
 
-    @Column(name="libelleNiv")
-    private String libelleNiv ;
-
-    @Column(name="libelleSpec")
-    private String libelleSpec ;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "NIVEAU", nullable = false)
     private Niveau niveau;
@@ -51,7 +45,7 @@ public class Section implements Serializable {
     @JoinColumn(name = "SPECIALITE", nullable = false)
     private Specialite specialite;
 
-    @OneToMany(mappedBy="section")
+   @OneToMany(mappedBy="section")
     private List<Document> documents;
 
 }
