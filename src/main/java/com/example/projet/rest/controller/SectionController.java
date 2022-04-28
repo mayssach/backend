@@ -38,9 +38,7 @@ public class SectionController {
         List<SectionDto> sectionDtos = modelMapper.map(sectionList,listType);
         return ResponseEntity.status(HttpStatus.OK).body(sectionDtos);
     }
-
-
-
+    
     @GetMapping("/Sections/{idsec}")
     public Object retrieveSection(@PathVariable Long idsec) {
         Section s = sectionService.getSection(idsec);

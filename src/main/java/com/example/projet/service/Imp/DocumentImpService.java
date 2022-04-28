@@ -73,4 +73,8 @@ public class DocumentImpService implements DocumentService {
     public Stream<Document> getAllDocumentsByNivType(Long idNiv,Long idType) {
         return documentRepository.findDocumentByNiveauIdNiveauAndTypeDocIdTypeDoc(idNiv,idType).stream();
     }
+    @Override
+    public void DeleteDocument(String id) {
+        documentRepository.deleteById(id);
+    }
 }

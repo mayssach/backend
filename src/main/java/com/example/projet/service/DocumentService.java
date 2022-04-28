@@ -18,4 +18,5 @@ public interface DocumentService {
     Stream<Document> getAllDocuments();
     Stream<Document> getAllDocumentsBySectType(Long idSec,Long idType);
     Stream<Document> getAllDocumentsByNivType(Long idNiv,Long idType);
+    void DeleteDocument(String id);
 }

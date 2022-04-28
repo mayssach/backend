@@ -97,4 +97,9 @@ public class DocumentController {
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + document.getNom() + "\"")
                 .body(document.getData());
     }
+    @DeleteMapping("/documents/{id}")
+    public Object DeleteDoc(@PathVariable String id) {
+        documentService.DeleteDocument(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
+    }
 }
