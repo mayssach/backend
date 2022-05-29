@@ -13,10 +13,9 @@ import lombok.Setter;
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class UtilisateurDto {
-    private Long idutilisateur ;
+    private Long id ;
     private String username ;
-    private String password ;
-    private String nom ;
-    private String prenom ;
+    private String email ;
+    private int active;
 
 }

@@ -17,6 +17,7 @@ import com.example.projet.security.payload.response.JwtResponse;
 import com.example.projet.security.payload.response.MessageResponse;
 import com.example.projet.security.service.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -53,28 +54,28 @@ public class AuthController {
         List<String> roles = userDetails.getAuthorities().stream()
                 .map(item -> item.getAuthority())
                 .collect(Collectors.toList());
+        if(userDetails.getActive()==1)
         return ResponseEntity.ok(new JwtResponse(jwt,
                 userDetails.getId(),
                 userDetails.getUsername(),
                 userDetails.getEmail(),
                 roles));
+        else
+        {
+            String message = "Votre compte n'est pas encore active!";
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new ResponseMessage(message));}
     }
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
         if (userRepository.existsByUsername(signUpRequest.getUsername())) {
-            return ResponseEntity
-                    .badRequest()
-                    .body(new MessageResponse("Error: Username is already taken!"));
+            return ResponseEntity.badRequest().body(new MessageResponse("Error: Username is already taken!"));
         }
         if (userRepository.existsByEmail(signUpRequest.getEmail())) {
-            return ResponseEntity
-                    .badRequest()
-                    .body(new ResponseMessage("Error: Email is already in use!"));
+            return ResponseEntity.badRequest().body(new ResponseMessage("Error: Email is already in use!"));
         }
         // Create new user's account
         Utilisateur user = new Utilisateur(signUpRequest.getUsername(),
-                signUpRequest.getEmail(),
-                encoder.encode(signUpRequest.getPassword()));
+                signUpRequest.getEmail(),encoder.encode(signUpRequest.getPassword()));
         Set<String> strRoles = signUpRequest.getRole();
         Set<Role> roles = new HashSet<>();
         if (strRoles == null) {
@@ -88,6 +89,7 @@ public class AuthController {
                         Role adminRole = roleRepository.findByName(ERole.ROLE_ADMIN)
                                 .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
                         roles.add(adminRole);
+                        user.setActive(1);
                         break;
                     default:
                         Role userRole = roleRepository.findByName(ERole.ROLE_USER)
@@ -97,6 +99,7 @@ public class AuthController {
             });
         }
         user.setRoles(roles);
+
         userRepository.save(user);
         return ResponseEntity.ok(new ResponseMessage("User registered successfully!"));
     }
